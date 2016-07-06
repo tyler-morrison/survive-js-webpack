@@ -1,7 +1,9 @@
+// External Dependencies
 const path = require('path');
 
 // Webpack Plugins
 const merge = require('webpack-merge'),
+  validate = require('webpack-validator'),
   HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const PATHS = {
@@ -37,4 +39,5 @@ switch (process.env.npm_lifecycle_event) {
     config = merge(common, {});
 }
 
-module.exports = config;
+// Adding webpack-validator to warn us of config issues
+module.exports = validate(config);
