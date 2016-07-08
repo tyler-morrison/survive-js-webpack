@@ -82,4 +82,6 @@ switch (process.env.npm_lifecycle_event) {
 }
 
 // Adding webpack-validator to warn us of config issues
-module.exports = validate(config);
+module.exports = validate(config, {
+    quiet: true
+});
