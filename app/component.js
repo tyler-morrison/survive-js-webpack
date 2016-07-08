@@ -1,6 +1,6 @@
 module.exports = function() {
-    const styles = require('./main.css');
-    let element = document.createElement('h1');
+    var styles = require('./main.css');
+    var element = document.createElement('h1');
 
     element.innerHTML = 'Hello world';
 
