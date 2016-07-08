@@ -1,4 +1,6 @@
-const webpack = require('webpack');
+// External Dependencies
+const webpack = require('webpack'),
+    CleanWebpackPlugin = require('clean-webpack-plugin');
 
 exports.devServer = (options) => {
     return {
@@ -85,3 +87,14 @@ exports.extractBundle = (options) => {
         ]
     };
 };
+
+exports.clean = (path) => {
+    return {
+        plugins: [
+            new CleanWebpackPlugin([path], {
+                // Without `root` CleanWebpackPLugin won’t point to our project and will fail
+                root: process.cwd()
+            })
+        ]
+    };
+}
