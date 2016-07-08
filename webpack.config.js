@@ -13,6 +13,7 @@ const merge = require('webpack-merge'),
 const PATHS = {
     app: path.join(__dirname, 'app'),
     style: [
+        path.join(__dirname, 'node_modules', 'purecss'),
         path.join(__dirname, 'app', 'main.css')
     ],
     build: path.join(__dirname, 'build')
@@ -22,7 +23,8 @@ const common = {
     //Entry accepts a path or an object of entries.
     //We’ll be using the latter form given it’s convenient with more complex configurations.
     entry: {
-        app: PATHS.app
+        app: PATHS.app,
+        style: PATHS.style
     },
     output: {
         path: PATHS.build,
@@ -61,16 +63,14 @@ switch (process.env.npm_lifecycle_event) {
                 entries: Object.keys(pkg.dependencies)
             }),
             parts.minify(),
-            parts.setupCSS(PATHS.style)
+            parts.extractCSS(PATHS.style),
+            parts.purifyCSS([PATHS.app])
         );
         break;
     default:
         config = merge(
             common, {
                 devtool: 'eval-source-map',
-                entry: {
-                    style: PATHS.style
-                }
             },
             parts.setupCSS(PATHS.style),
             parts.devServer({
