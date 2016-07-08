@@ -39,9 +39,20 @@ let config;
 // Detect how NPM is run and branch bases on that env variable
 switch (process.env.npm_lifecycle_event) {
     case 'build':
+        config = merge(
+            common, {
+                devtool: 'source-map',
+                entry: {
+                    style: PATHS.style
+                }
+            },
+            parts.setupCSS(PATHS.style)
+        );
+        break;
     default:
         config = merge(
             common, {
+                devtool: 'eval-source-map',
                 entry: {
                     style: PATHS.style
                 }
