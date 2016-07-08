@@ -32,3 +32,15 @@ exports.devServer = (options) => {
         ]
     };
 };
+
+exports.setupCSS = (paths) => {
+    return {
+        module: {
+            loaders: [{
+                test: /\.css$/,
+                loaders: ['style', 'css'],
+                include: paths
+            }]
+        }
+    };
+};

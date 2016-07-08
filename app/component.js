@@ -1,7 +1,10 @@
 module.exports = function() {
-  var element = document.createElement('h1');
+    const styles = require('./main.css');
+    let element = document.createElement('h1');
 
-  element.innerHTML = 'Hello world';
+    element.innerHTML = 'Hello world';
 
-  return element;
+    element.className = styles.redButton;
+
+    return element;
 };

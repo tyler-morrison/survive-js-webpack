@@ -11,6 +11,9 @@ const merge = require('webpack-merge'),
 
 const PATHS = {
     app: path.join(__dirname, 'app'),
+    style: [
+        path.join(__dirname, 'app', 'main.css')
+    ],
     build: path.join(__dirname, 'build')
 };
 
@@ -31,16 +34,19 @@ const common = {
     ]
 };
 
-var config;
+let config;
 
 // Detect how NPM is run and branch bases on that env variable
 switch (process.env.npm_lifecycle_event) {
     case 'build':
-        config = merge(common, {})
-        break;
     default:
         config = merge(
-            common,
+            common, {
+                entry: {
+                    style: PATHS.style
+                }
+            },
+            parts.setupCSS(PATHS.style),
             parts.devServer({
                 // Customize host/port here if needed
                 host: process.env.HOST,
