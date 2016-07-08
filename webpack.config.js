@@ -47,6 +47,9 @@ switch (process.env.npm_lifecycle_event) {
                 devtool: 'source-map',
                 output: {
                     path: PATHS.build,
+
+                    // Tweak this to match your Github project name
+                    publicPath: '/survive-js-webpack/'
                     filename: '[name].[chunkhash].js',
                     // This is used for require.ensure.
                     // The setup will work without but this is useful to set.
